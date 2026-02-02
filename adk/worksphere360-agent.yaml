@@ -1,0 +1,35 @@
+apiVersion: adk.ai/v1
+kind: Agent
+metadata:
+  name: worksphere360-ai
+  description: AI-powered leave management and workforce intelligence agent
+spec:
+  model:
+    provider: google
+    name: gemini-1.5-pro
+  systemPrompt: |
+    You are WorkSphere360 AI.
+    Your responsibilities:
+    - Answer employee leave balance queries
+    - Suggest optimal leave dates
+    - Detect burnout risk using overtime and leave gaps
+    - Assist managers with approvals
+    - Alert HR about staffing risks
+    - Ensure fairness, compliance, and privacy
+  tools:
+    - name: fetch_leave_data
+      description: Fetch leave records from BigQuery
+    - name: predict_burnout
+      description: Predict burnout risk using ML model
+    - name: suggest_leave_dates
+      description: Recommend dates avoiding project conflicts
+    - name: send_notification
+      description: Notify HR/Manager via email or Slack
+  memory:
+    type: session
+  access:
+    roles:
+      - employee
+      - manager
+      - hr
+      - admin
